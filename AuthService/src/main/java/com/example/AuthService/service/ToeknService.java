@@ -28,7 +28,7 @@ public class ToeknService {
 		return new UserService();
 	}
 	
-	private String secret="57356949357wyrsdjgyu753449isvd8w7e712e9ivcsjc";
+	private final String secret="57356949357wyrsdjgyu753449isvd8w7e712e9ivcsjc";
 	
 	private SecretKey getsecretkey() {
 		byte[] keybite=Decoders.BASE64.decode(this.secret);
@@ -51,7 +51,7 @@ public class ToeknService {
 		try {
 			Claims claims=Jwts.parserBuilder().setSigningKey(getsecretkey()).build().parseClaimsJws(token).getBody();
 			if(userservice().exists(claims.getAudience())) {
-				return claims.getExpiration().before(new Date());
+				return !claims.getExpiration().before(new Date());
 			}
 			else {
 				return false;

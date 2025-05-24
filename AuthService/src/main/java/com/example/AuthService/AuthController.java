@@ -18,6 +18,8 @@ import com.example.AuthService.DTO.UserCredDTO;
 import com.example.AuthService.model.UserCredentials;
 import com.example.AuthService.service.UserService;
 
+import reactor.core.publisher.Mono;
+
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
@@ -55,9 +57,9 @@ public class AuthController {
 	}
 	
 	@PostMapping("/validate")
-	public boolean validatetoken(@RequestBody String token) {
+	public Mono<Boolean> validatetoken(@RequestBody String token) {
 		
-			return service.validatetoken(token);
+			return Mono.just(service.validatetoken(token));
 	
 	}
 	

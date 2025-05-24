@@ -31,10 +31,8 @@ public class InMemoryAuthWebSecurityConfigurer {
 	@SuppressWarnings("removal")
 	@Bean 
 	public SecurityFilterChain securityfilterchain(HttpSecurity http) throws Exception{
-		return http.csrf().disable()
-                .authorizeHttpRequests()
-                .requestMatchers("/auth/*").permitAll()
-                .and()
+		return http.csrf((csrf)->csrf.disable())
+                .authorizeHttpRequests((auth)->auth.requestMatchers("/auth/**").permitAll().anyRequest().authenticated())
                 .build();
 	}
 	
