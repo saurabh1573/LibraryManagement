@@ -23,7 +23,7 @@ public class AuthFilter implements Filter {
 		HttpServletRequest httprequest=(HttpServletRequest) request;
 		if(httprequest.getHeader("Loggedinuser")!=null ||httprequest.getHeader("Loggedinuser")=="") {
 			String username=httprequest.getHeader("Loggedinuser");
-			boolean validuser=template.getForObject("http://AUTHSERVICE/auth/exists/", Boolean.class);
+			boolean validuser=template.getForObject("http://AUTHSERVICE/auth/exists/"+username, Boolean.class);
 			if(!validuser) {
 				HttpServletResponse httpresponse= (HttpServletResponse) response;
 				httpresponse.setStatus(HttpServletResponse.SC_FORBIDDEN);

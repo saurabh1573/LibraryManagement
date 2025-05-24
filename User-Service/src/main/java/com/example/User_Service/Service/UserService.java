@@ -27,8 +27,8 @@ public class UserService {
 	
     public UserDTO save(UserDTO userdto) {
     	User user=dtotomodel(userdto);
-    	user=repository.save(user);
-    	return modeltodto(user);
+    	User user1=repository.save(user);
+    	return modeltodto(user1);
     }
 	
 	public UserDTO FindById(int id) {
